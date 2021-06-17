@@ -12,4 +12,4 @@ app.get("/", async(_, res) => {
   return res.send("Hello, world!");
 });
 
-app.listen(port, () => `Server is now listening to port: ${port}`);
+app.listen(port, () => console.log(`Server is now listening to port: ${port}`));
