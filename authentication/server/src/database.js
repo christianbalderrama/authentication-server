@@ -1,11 +1,23 @@
 import {Client} from "pg";
+import {Sequelize} from "sequelize";
+
+const user = process.env.PG_USER;
+const password = process.env.PG_PASSWORD;
+const host = process.env.PG_HOST;
+const port = process.env.PG_PORT;
+const database = process.env.PG_DATABASE;
 
 const client = new Client({
-  user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  host: process.env.PG_HOST,
-  port: process.env.PG_PORT,
-  database: process.env.PG_DATABASE,
+  user,
+  password,
+  host,
+  port,
+  database,
 });
 
-export default client;
+const sequelize = new Sequelize(`postgres://${user}:${password}@${host}:${port}/${database}`);
+
+export {
+  client,
+  sequelize,
+};

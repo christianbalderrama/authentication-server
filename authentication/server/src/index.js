@@ -3,12 +3,11 @@ import "dotenv/config";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import client from "./database";
+import {client, sequelize} from "./database";
 
 import first from "./routes/first";
 
 const port = process.env.PORT || 3000;
-const env = process.env.NODE_ENV;
 const app = express();
 
 app.use(cors());
@@ -25,6 +24,15 @@ app.get("/db", async(_, res) => {
     return res.send(`Successsfully connected to ${process.env.PG_DATABASE}`).status(200);
   } catch (err) {
     console.log(err);
+    return res.status(403).send(err);
+  }
+});
+
+app.get("/db/sequelize", async(_, res) => {
+  try {
+    await sequelize.authenticate();
+    return res.send("Sequelize successfully connected to Postgres");
+  } catch (err) {
     return res.status(403).send(err);
   }
 });
