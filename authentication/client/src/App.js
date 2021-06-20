@@ -1,20 +1,25 @@
-import axios from "axios";
-import {Button} from "react-bootstrap";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {First, Second, Third, Fourth, Fifth, Register} from "./components";
+
+function Index() {
+  console.log("Index");
+  return (
+    <h1>{"Hello, World!"}</h1>
+  );
+}
 
 export default function App() {
-  async function handleClick() {
-    console.log("I'm clicked!");
-    const result = await axios.get(process.env.REACT_APP_API_URL);
-
-    console.log("RESULT >>> ", result);
-  }
-
   return (
-    <>
-      <h1>{"Hello, World!"}</h1>
-      <Button bsSize="sm" onClick={() => handleClick()}>
-        {"Test"}
-      </Button>
-    </>
+    <Router>
+      <Switch>
+        <Route path="/first" component={First} />
+        <Route path="/second" component={Second} />
+        <Route path="/third" component={Third} />
+        <Route path="/fourth" component={Fourth} />
+        <Route path="/fifth" component={Fifth} />
+        <Route path="/register" component={Register} />
+        <Route path="/" component={Index} />
+      </Switch>
+    </Router>
   );
 }
