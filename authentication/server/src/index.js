@@ -5,12 +5,15 @@ import morgan from "morgan";
 import cors from "cors";
 import client from "./database";
 
+import first from "./routes/first";
+
 const port = process.env.PORT || 3000;
 const env = process.env.NODE_ENV;
 const app = express();
 
 app.use(cors());
 app.use(morgan("dev"));
+app.use("/first", first);
 
 app.get("/", async(_, res) => {
   return res.send("Hello, world!");
