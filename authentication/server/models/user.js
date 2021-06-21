@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'user',
+    modelName: "User",
+    tableName: "users"
   });
   return user;
 };

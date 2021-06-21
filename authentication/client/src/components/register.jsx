@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Form, Input, Button, Select} from "antd";
+import axios from "axios";
 
 const layout = {
   labelCol: { span: 8 },
@@ -27,6 +28,8 @@ export default function Register() {
   console.log("Register");
   async function onFinish(values) {
     console.log('Success:', values);
+    const result = await axios.post(`${process.env.REACT_APP_API_URL}/${select}`, {...values});
+    console.log("Result: ", result);
   }
 
   function onFinishFailed(errorInfo) {
