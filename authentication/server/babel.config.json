@@ -1,5 +1,5 @@
 {
-  "plugins": ["@babel/plugin-transform-regenerator"],
+  "plugins": ["@babel/plugin-transform-regenerator", "@babel/plugin-transform-destructuring"],
   "presets": [
     [
       "@babel/preset-env",

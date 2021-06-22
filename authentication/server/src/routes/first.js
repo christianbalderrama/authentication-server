@@ -2,7 +2,7 @@ import express from "express";
 import db from "../../models/index";
 
 console.log("db >>> ", db.sequelize.models);
-const {User} = db.sequelize.models;
+const {Authentication1} = db.sequelize.models;
 const router = express.Router();
 
 router.get("/", async(_, res) => {
@@ -11,18 +11,15 @@ router.get("/", async(_, res) => {
 
 router.post("/", async(req, res) => {
   console.log("body >>> ", req.body);
-  return res.send("Success");
-});
-
-
-router.get("/user", async(_, res) => {
-  const user = await User.create({
-    firstName: "test",
-    lastName: "test",
-    email: "test@gmail.com",
+  const {username, password} = req.body;
+  const user = await Authentication1.create({
+    username,
+    password
   });
 
-  return res.send(user);
+  console.log("User >>> ", user);
+
+  return res.status(200);
 });
 
 export default router;
