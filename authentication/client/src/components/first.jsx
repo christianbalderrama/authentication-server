@@ -1,5 +1,5 @@
-import React from "react";
-import {Form, Input, Button, Select} from "antd";
+import React, {useState} from "react";
+import {Form, Input, Button} from "antd";
 import axios from "axios";
 
 const layout = {
@@ -14,24 +14,27 @@ const tailLayout = {
   },
 };
 
-const options = [
-  "first",
-  "second",
-  "third",
-  "fourth",
-  "fifth",
-];
-
 export default function First() {
+  const [state, setState] = useState({
+    username: "",
+    password: "",
+  });
+
   console.log("First");
-  async function onFinish(values) {
-    console.log('Success:', values);
-    const result = await axios.post(`${process.env.REACT_APP_API_URL}/first/login`, {...values});
-    console.log("Result: ", result);
+  async function handleLogin() {
+    console.log("login: ", state);
+    const result = await axios.post(`${process.env.REACT_APP_API_URL}/first/login`, {...state});
   }
 
-  function onFinishFailed(errorInfo) {
-    console.log('Failed:', errorInfo);
+  async function handleRegister() {
+    console.log("register: ", state);
+  }
+
+  function handleChange(value, key) {
+    return setState({
+      ...state,
+      [key]: value,
+    });
   }
 
   return (
@@ -41,24 +44,27 @@ export default function First() {
         <Form
           {...layout}
           name="basic"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}>
+          initialValues={{ remember: true }}>
           <Form.Item
             label="Username"
             name="username"
             rules={[{ required: true, message: 'Please input your username!' }]}>
-            <Input />
+            <Input onChange={(e) => handleChange(e.target.value, "username")} />
           </Form.Item>
           <Form.Item
             label="Password"
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}>
-            <Input.Password />
+            <Input.Password onChange={(e) => handleChange(e.target.value, "password")} />
           </Form.Item>
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
-              {"Submit"}
+            <Button onClick={() => handleLogin()} type="primary">
+              {"Login"}
+            </Button>
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button onClick={() => handleRegister()} type="primary">
+              {"Register"}
             </Button>
           </Form.Item>
         </Form>
