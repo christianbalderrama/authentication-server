@@ -14,6 +14,8 @@ const tailLayout = {
   },
 };
 
+const baseURL = `${process.env.REACT_APP_API_URL}`;
+
 export default function First() {
   const [state, setState] = useState({
     username: "",
@@ -23,11 +25,14 @@ export default function First() {
   console.log("First");
   async function handleLogin() {
     console.log("login: ", state);
-    const result = await axios.post(`${process.env.REACT_APP_API_URL}/first/login`, {...state});
+    const result = await axios.post(`${baseURL}/first/login`, {...state});
+    console.log(result);
   }
 
   async function handleRegister() {
     console.log("register: ", state);
+    const result = await axios.post(`${baseURL}/first`, {...state});
+    console.log(result);
   }
 
   function handleChange(value, key) {
