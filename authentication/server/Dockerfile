@@ -18,6 +18,8 @@ RUN npm install -g pnpm
 RUN pnpm add -g pnpm
 RUN pnpm install
 
+EXPOSE 3000
+
 COPY script.sh .
 RUN chmod +x ./script.sh
 CMD ./script.sh $NODE_ENV
