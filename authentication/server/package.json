@@ -9,7 +9,7 @@
     "clean": "rm -Rf dist && mkdir dist",
     "start": "node ./dist/index.js",
     "pipeline-development": "npm run clean && npx babel ./src/ -d ./dist --source-maps && npm start",
-    "pipeline-production": "npm run clean && npx babel ./src -d ./dist && node ./src/minify.js && npm start"
+    "pipeline-production": "npm run clean && npx babel ./src -d ./dist && npm start"
   },
   "keywords": [],
   "author": "",
