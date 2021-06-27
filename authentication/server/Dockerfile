@@ -1,5 +1,6 @@
 FROM node
 
+ARG NODE_ENV=development
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=postgres
 ENV POSTGRES_DB=postgres
@@ -12,4 +13,4 @@ COPY . /home/app
 RUN npm install
 
 RUN chmod +x ./script.sh
-CMD ["./script.sh"]
+RUN ./script.sh ${NODE_ENV}
