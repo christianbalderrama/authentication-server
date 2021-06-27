@@ -1,6 +1,7 @@
 #!/bin/sh
 # Author : Christian Balderrama <0christianbalderrama@gmail.com>
 
+echo "NODE_ENV >>> " $1
 case $1 in
   "development")
     echo "Running development pipeline..."

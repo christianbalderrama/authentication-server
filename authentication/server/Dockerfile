@@ -1,16 +1,23 @@
-FROM node
+FROM node:alpine
+RUN apk add --no-cache --upgrade bash
 
 ARG NODE_ENV=development
+ENV NODE_ENV $NODE_ENV
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=postgres
 ENV POSTGRES_DB=postgres
 ENV PGADMIN_DEFAULT_EMAIL=admin@example.com
 ENV PGADMIN_PASSWORD=admin
 
-RUN mkdir -p /home/app
-COPY . /home/app
+RUN mkdir /app
+WORKDIR /app
+COPY package.json .
+COPY . .
 
-RUN npm install
+RUN npm install -g pnpm
+RUN pnpm add -g pnpm
+RUN pnpm install
 
+COPY script.sh .
 RUN chmod +x ./script.sh
-RUN ./script.sh ${NODE_ENV}
+CMD ./script.sh $NODE_ENV
