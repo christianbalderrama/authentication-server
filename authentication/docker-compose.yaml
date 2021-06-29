@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  server:
+    image: christianbalderrama/my-private-repo
+    ports:
+      - 3000:3000
+  postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+  pgadmin4:
+    image: dpage/pgadmin4:snapshot
+    ports:
+      - 61886:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
