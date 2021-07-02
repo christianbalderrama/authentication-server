@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo "Building Stage: ${BRANCH_NAME}"
         withCredentials([
-          usernamePassword(credentials: "test-credentials", username: "USER", password: "PWD")
+          usernamePassword(credentials: "test-credentials", usernameVariable: "USER", passwordVariable: "PWD")
         ]) {
           sh "echo ${USER} ${PWD}"
         }
