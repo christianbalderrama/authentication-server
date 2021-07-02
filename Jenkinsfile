@@ -7,7 +7,7 @@ pipeline {
     stage("Build") {
       steps {
         echo "Building Stage: ${BRANCH_NAME}"
-        echo '${TEST_CREDENTIALS_USR} ${TEST_CREDENTIALS_PWD}'
+        echo "${TEST_CREDENTIALS_USR} ${TEST_CREDENTIALS_PWD}"
         echo "Building Docker image"
       }
     }
