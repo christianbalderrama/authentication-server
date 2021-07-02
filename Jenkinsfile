@@ -1,9 +1,13 @@
 pipeline {
   agent any
+  environment {
+    TEST_CREDENTIALS = credentials("test-credentials");
+  }
   stages {
     stage("Build") {
       steps {
         echo "Building Stage: ${BRANCH_NAME}"
+        echo "${TEST_CREDENTIALS}"
         echo "Building Docker image"
       }
     }
