@@ -7,7 +7,7 @@ pipeline {
         withCredentials([
           usernamePassword(credentialsId: "test-credentials", usernameVariable: "USER", passwordVariable: "PWD")
         ]) {
-          sh "echo ${USER} ${PWD}"
+          sh 'echo user : ${USER} password : ${PWD}'
         }
         echo "Building Docker image"
       }
