@@ -1,13 +1,13 @@
 pipeline {
   agent any
-  environment {
-    TEST_CREDENTIALS = credentials("test-credentials");
-  }
   stages {
     stage("Build") {
       steps {
         echo "Building Stage: ${BRANCH_NAME}"
-        echo "${TEST_CREDENTIALS_USR} ${TEST_CREDENTIALS_PWD}"
+        withCredentials([usernamePassword(credentials: "test-credentials", usernameVariable: USER, passwordVariable: PWD)]) {
+          echo "USERNAME ${USER}"
+          echo "PASSWORD ${PWD}"
+        }
         echo "Building Docker image"
       }
     }
