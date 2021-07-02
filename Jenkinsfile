@@ -4,9 +4,10 @@ pipeline {
     stage("Build") {
       steps {
         echo "Building Stage: ${BRANCH_NAME}"
-        withCredentials([usernamePassword(credentials: "test-credentials", usernameVariable: USER, passwordVariable: PWD)]) {
-          sh 'echo ${USER}'
-          sh 'echo ${PWD}'
+        withCredentials([
+          usernamePassword(credentials: "test-credentials", usernameVariable: USER, passwordVariable: PWD)
+        ]) {
+          sh "echo ${USER} ${PWD}"
         }
         echo "Building Docker image"
       }
