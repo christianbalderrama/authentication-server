@@ -3,18 +3,18 @@ pipeline {
   stages {
     stage("Build") {
       steps {
-        echo "Building Stage..."
+        echo "Building Stage: ${BRANCH_NAME}"
         echo "Building Docker image"
       }
     }
     stage("Test") {
       steps {
-        echo "Testing Stage..."
+        echo "Testing Stage: ${BRANCH_NAME}"
       }
     }
     stage("Deploy") {
       steps {
-        echo "Deployment Stage..."
+        echo "Deployment Stage: ${BRANCH_NAME}"
       }
     }
   }
