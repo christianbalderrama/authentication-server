@@ -4,12 +4,9 @@ pipeline {
     stage("Build") {
       steps {
         echo "Building Stage: ${BRANCH_NAME}"
-        withCredentials([
-          usernamePassword(credentialsId: "test-credentials", usernameVariable: "USER", passwordVariable: "PWD")
-        ]) {
-          sh 'echo user : ${USER} password : ${PWD}'
-        }
         echo "Building Docker image"
+        sh 'docker build -t authentication-server:${BRANCH_NAME}'
+        eco "Docker image built successfully!"
       }
     }
     stage("Test") {
@@ -20,6 +17,8 @@ pipeline {
     stage("Deploy") {
       steps {
         echo "Deployment Stage: ${BRANCH_NAME}"
+        sh 'docker push christianbalderrama/authentication-server:${BRANCH_NAME}'
+        echo 'Successfully pushed with tag ${BRANCH_NAME}'
       }
     }
   }
