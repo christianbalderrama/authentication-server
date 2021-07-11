@@ -11,9 +11,9 @@ pipeline {
         slackSend(
           color: "warning",
           message: '@here Build Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+        )
         slackSend(
           color: "good",
-          channel: slackMessage.threadId,
           message: "Build Stage Done!"
         )
       }
@@ -26,7 +26,6 @@ pipeline {
         )
         slackSend(
           color: "good",
-          channel: slackMessage.threadId,
           message: "Testing Stage Done!"
         )
       }
@@ -35,12 +34,10 @@ pipeline {
       steps {
         slackSend(
           color: "warning",
-          notifyCommitters: true,
           message: '@here Deployment Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
         )
         slackSend(
           color: "good",
-          channel: slackMessage.threadId,
           message: "Deployment Stage Done!"
         )
       }
@@ -50,14 +47,12 @@ pipeline {
     success {
       slackSend(
         color: "good",
-        notifyCommitters: true,
         message: '@here Success - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
       )
     }
     failure {
       slackSend(
         color: "danger",
-        notifyCommitters: true,
         message: '@here Failed - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
       )
     }
