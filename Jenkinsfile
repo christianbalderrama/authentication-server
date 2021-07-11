@@ -5,12 +5,9 @@ pipeline {
       steps {
         echo "Building Stage: ${BRANCH_NAME}"
         echo "Building Docker image"
-        script {
-          docker.withRegistry("https://registry.hub.docker.com", "dockerHub") {
-            def image = docker.build("christianbalderrama/authentication-server:${BUILD_NAME}");
-            image.push();
-          }
-        }
+        sh """
+          docker build -t hello_there .
+        """
         echo "Docker image built successfully!"
       }
     }
