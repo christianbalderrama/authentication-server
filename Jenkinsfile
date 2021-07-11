@@ -1,16 +1,11 @@
 pipeline {
   agent any
   stages {
-    environment {
-      JOB_NAME = env.JOB_NAME
-      BUILD_NAME = env.BUILD_NAME
-      BUILD_ID = env.BUILD_ID
-    }
     stage("Build") {
       steps {
         slackSend(
           color: "warning",
-          message: '@here Build Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+          message: '@here Build Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}'
         )
         slackSend(
           color: "good",
@@ -22,7 +17,7 @@ pipeline {
       steps {
         slackSend(
           color: "warning",
-          message: '@here Testing Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+          message: '@here Testing Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}'
         )
         slackSend(
           color: "good",
@@ -34,7 +29,7 @@ pipeline {
       steps {
         slackSend(
           color: "warning",
-          message: '@here Deployment Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+          message: '@here Deployment Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}'
         )
         slackSend(
           color: "good",
@@ -47,13 +42,13 @@ pipeline {
     success {
       slackSend(
         color: "good",
-        message: '@here Success - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+        message: '@here Success - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}'
       )
     }
     failure {
       slackSend(
         color: "danger",
-        message: '@here Failed - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+        message: '@here Failed - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}'
       )
     }
   }
