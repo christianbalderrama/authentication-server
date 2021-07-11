@@ -7,11 +7,10 @@ pipeline {
           def slackMessage = slackSend(
             color: "warning",
             notifyCommitters: true,
-            message: 'Build Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+            message: '@here Build Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
           )
           slackSend(
             channel: slackMessage.threadId,
-            color: "good",
             message: "Build Stage Done!"
           )
         }
@@ -23,12 +22,11 @@ pipeline {
           def slackMessage = slackSend(
             color: "warning",
             notifyCommitters: true,
-            message: 'Testing Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+            message: '@here Testing Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
           )
 
           slackSend(
             channel: slackMessage.threadId,
-            color: "good",
             message: "Testing Stage Done!"
           )
         }
@@ -40,12 +38,11 @@ pipeline {
           def slackMessage = slackSend(
             color: "warning",
             notifyCommitters: true,
-            message: 'Deployment Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+            message: '@here Deployment Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
           )
 
           slackSend(
             channel: slackMessage.threadId,
-            color: "good",
             message: "Deployment Stage Done!"
           )
         }
@@ -57,14 +54,14 @@ pipeline {
       slackSend(
         color: "good",
         notifyCommitters: true,
-        message: 'Build Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+        message: '@here Build Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
       )
     }
     failure {
       slackSend(
         color: "danger",
         notifyCommitters: true,
-        message: 'Failed - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
+        message: '@here Failed - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
       )
     }
   }
