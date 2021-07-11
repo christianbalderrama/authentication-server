@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    environment {
+      JOB_NAME = env.JOB_NAME
+      BUILD_NAME = env.BUILD_NAME
+      BUILD_ID = env.BUILD_ID
+    }
     stage("Build") {
       steps {
         slackSend(
