@@ -5,12 +5,16 @@ pipeline {
       steps {
         echo "Building Stage: ${BRANCH_NAME}"
         echo "Building Docker image"
-        sh 'docker build -t authentication-server:${BRANCH_NAME}'
-        eco "Docker image built successfully!"
+        docker.withRegistry("https://registry.hub.docker.com", "dockerHub") {
+          def image = docker.build("christianbalderrama/authentication-server:${BUILD_NAME}");
+          image.push();
+        }
+        echo "Docker image built successfully!"
       }
     }
     stage("Test") {
       steps {
+        sh 'node --version'
         echo "Testing Stage: ${BRANCH_NAME}"
       }
     }
