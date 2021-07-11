@@ -3,8 +3,26 @@ pipeline {
   stages {
     stage("Build") {
       steps {
-        slackSend color: "good", message: "Message from Jenkins Pipeline"
+        slackSend(color: "warning", message: "Build Stage ...")
       }
+    }
+    stage("Test") {
+      steps {
+        slackSend(color: "warning", message: "Test Stage ...")
+      }
+    }
+    stage("Deploy") {
+      steps {
+        slackSend(color: "warning", message: "Deployment Stage ...")
+      }
+    }
+  }
+  post {
+    success {
+      slackSend(color: "good", message: "Deployment Successful!")
+    }
+    failure {
+      slackSend(color: "error", message: "Failed")
     }
   }
 }
