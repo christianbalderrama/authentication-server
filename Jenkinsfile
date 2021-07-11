@@ -10,7 +10,7 @@ pipeline {
             message: 'Build Stage Started - ${JOB_NAME}-${BUILD_NUMBER}:${BUILD_ID}'
           )
           slackSend(
-            channel: slackMessage.id,
+            channel: slackMessage.threadId,
             color: "good",
             message: "Build Stage Done!"
           )
@@ -27,7 +27,7 @@ pipeline {
           )
 
           slackSend(
-            channel: slackMessage.id,
+            channel: slackMessage.threadId,
             color: "good",
             message: "Testing Stage Done!"
           )
@@ -44,7 +44,7 @@ pipeline {
           )
 
           slackSend(
-            channel: slackMessage.id,
+            channel: slackMessage.threadId,
             color: "good",
             message: "Deployment Stage Done!"
           )
