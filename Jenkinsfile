@@ -5,7 +5,7 @@ pipeline {
       steps {
         slackSend(
           color: "warning",
-          message: '@here Build Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}'
+          message: '@here Build Stage Started - $JOB_NAME-$BUILD_NUMBER:$BUILD_ID'
         )
         slackSend(
           color: "good",
