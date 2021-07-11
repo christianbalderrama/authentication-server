@@ -11,7 +11,7 @@ pipeline {
 
         slackSend(
           channel: slackMessage.id,
-          color: "good"
+          color: "good",
           message: "Build Stage Done!"
         )
       }
