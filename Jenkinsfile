@@ -1,53 +1,14 @@
-node {
-  def app
-  environment {
-    repository = "christianbalderrama/authentication-server"
-  }
-  stage("Build") {
-    slackSend(
-      color: "warning",
-      message: "@here Build Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}"
-    )
-    script {
-      app = docker.build("christianbalderrama/authentication-server")
+pipeline {
+  agent {
+    docker { 
+      image 'node:14-alpine'
     }
-    slackSend(
-      color: "good",
-      message: "Build Stage Done!"
-    )
   }
-  stage("Test") {
-    slackSend(
-      color: "warning",
-      message: "@here Testing Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}"
-    )
-    slackSend(
-      color: "good",
-      message: "Testing Stage Done!"
-    )
-  }
-  stage("Deploy") {
-    slackSend(
-      color: "warning",
-      message: "@here Deployment Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}"
-    )
-    slackSend(
-      color: "good",
-      message: "Deployment Stage Done!"
-    )
-  }
-  post {
-    success {
-      slackSend(
-        color: "good",
-        message: "@here Success - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}"
-      )
-    }
-    failure {
-      slackSend(
-        color: "danger",
-        message: "@here Failed - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}"
-      )
+  stages {
+    stage('Test') {
+      steps {
+        sh 'node --version'
+      }
     }
   }
 }
