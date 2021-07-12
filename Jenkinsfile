@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  environment {
+    imagename = "christianbalderrama/authentication-server"
+    dockerImage = ''
+  }
   stages {
     stage("Build") {
       steps {
@@ -7,13 +11,13 @@ pipeline {
           color: "warning",
           message: "@here Build Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}"
         )
+        script {
+          dockerImage = docker.build imagename
+        }
         slackSend(
           color: "good",
           message: "Build Stage Done!"
         )
-        // script {
-          // Docker commands
-        // }
       }
     }
     stage("Test") {
