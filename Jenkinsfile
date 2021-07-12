@@ -7,7 +7,7 @@ pipeline {
           color: "warning",
           message: "@here Build Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}"
         )
-        script {
+        docker.withRegistry("https://hub.docker.com", "dockerHub") {
           dockerImage = docker.build "christianbalderrama/authentication-server"
         }
         slackSend(
