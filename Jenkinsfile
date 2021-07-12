@@ -1,4 +1,7 @@
 pipeline {
+  environment {
+    repository = "christianbalderrama/authentication-server"
+  }
   agent any
   stages {
     stage("Build") {
@@ -9,7 +12,7 @@ pipeline {
         )
         script {
           docker.withRegistry("https://hub.docker.com", "dockerHub") {
-            dockerImage = docker.build "christianbalderrama/authentication-server"
+            sh "docker build -t ${repository} ."
           }
         }
         slackSend(
