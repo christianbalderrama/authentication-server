@@ -11,9 +11,9 @@ pipeline {
           color: "good",
           message: "Build Stage Done!"
         )
-        script {
-
-        }
+        // script {
+          // Docker commands
+        // }
       }
     }
     stage("Test") {
