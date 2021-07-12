@@ -1,4 +1,5 @@
-pipeline {
+node {
+  def app
   environment {
     repository = "christianbalderrama/authentication-server"
   }
@@ -11,9 +12,7 @@ pipeline {
           message: "@here Build Stage Started - ${env.JOB_NAME}-${env.BUILD_NUMBER}:${env.BUILD_ID}"
         )
         script {
-          docker.withRegistry("https://hub.docker.com", "dockerHub") {
-            sh "docker build -t ${repository} ."
-          }
+          app = docker.build("christianbalderrama/authentication-server")
         }
         slackSend(
           color: "good",
