@@ -1,12 +1,19 @@
 pipeline {
-    agent {
-        docker { image 'node:14-alpine' }
+    agent any 
+    environment {
+        registry = "christianbalderrama/authentication-server"
+        registryCredential = 'DockerHub'
+        dockerImage = ''
     }
+    
     stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-            }
+    // Building Docker images
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry
         }
+      }
     }
+  }
 }
