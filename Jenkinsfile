@@ -12,7 +12,7 @@ pipeline {
         stage('Building Image') {
             steps {
                 script {
-                dockerImage = docker.build("${registry}", "--build-arg NODE_ENV=${env.BRANCH_NAME} .")
+                    dockerImage = docker.build("${registry}", "--build-arg NODE_ENV=${env.BRANCH_NAME} .")
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline {
                     sshagent(['authentication-server']) {
                         sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-18-141-58-123.ap-southeast-1.compute.amazonaws.com'
                         sh '''
-                            docker run -p 3000:3000 --name authentication-server christianbalderrama/authentication-server:main -d
+                            docker run -d -p 3000:3000 --name authentication-server christianbalderrama/authentication-server:main
                         '''
                     }
                 }
