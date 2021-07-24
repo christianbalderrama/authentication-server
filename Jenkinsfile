@@ -37,9 +37,9 @@ pipeline {
                         sh '''
                             docker stop authentication-server &&
                             docker rm authentication-server &&
-                            docker image prune --force &&
-                            docker run -d -p 3000:3000 --name authentication-server christianbalderrama/authentication-server:${env.BRANCH_NAME}
+                            docker image prune --force
                         '''
+                        sh "docker run -d -p 3000:3000 --name authentication-server christianbalderrama/authentication-server:${env.BRANCH_NAME}"
                     }
                 }
             }
