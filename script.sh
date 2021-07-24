@@ -7,7 +7,7 @@ case $1 in
     echo "Running development pipeline..."
     npm run pipeline-development
   ;;
-  "production")
+  "production" | "main")
     echo "Running production pipeline..."
     npm run pipeline-production
   ;;
