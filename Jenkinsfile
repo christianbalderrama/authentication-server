@@ -20,7 +20,7 @@ pipeline {
     stage('Upload Image') {
      steps{    
         script {
-            docker.withRegistry('', registryCredential) {
+            docker.withRegistry(registry, registryCredential) {
                 dockerImage.push("${env.BRANCH_NAME}")
             }
         }
