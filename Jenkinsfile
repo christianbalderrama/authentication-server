@@ -32,7 +32,7 @@ pipeline {
         stage('Deployment') {
             steps {
                 script {
-                    sshagent(credentials: 'ec2-user') {
+                    sshagent(['authentication-server']) {
                         sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-18-141-58-123.ap-southeast-1.compute.amazonaws.com'
                         sh '''
                             docker run -p 3000:3000 --name christianbalderrama/authentication-server:main -d
