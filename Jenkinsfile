@@ -9,9 +9,9 @@ pipeline {
     stages {
     // Building Docker images
     stage('Building image') {
-      steps{
+      steps {
         script {
-          dockerImage = docker.build registry
+          dockerImage = docker.build("${registry}", "--build-arg NODE_ENV=${env.BRANCH_NAME} .")
         }
       }
     }
@@ -20,7 +20,7 @@ pipeline {
     stage('Upload Image') {
      steps{    
         script {
-            docker.withRegistry(registry, registryCredential) {
+            docker.withRegistry('', registryCredential) {
                 dockerImage.push("${env.BRANCH_NAME}")
             }
         }
