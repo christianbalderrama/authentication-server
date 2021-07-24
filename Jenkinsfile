@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-        registry = "christianbalderrama/authentication-server"
+        registry = "christianbalderrama/authentication-server:${env.BRANCH_NAME}"
         registryCredential = 'DockerHub'
         dockerImage = ''
     }
