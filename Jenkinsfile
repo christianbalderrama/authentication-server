@@ -33,12 +33,12 @@ pipeline {
             steps {
                 script {
                     sshagent(['authentication-server']) {
+                        sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-18-141-58-123.ap-southeast-1.compute.amazonaws.com'
                         sh '''
-                            ssh -o StrictHostKeyChecking=no ec2-user@ec2-18-141-58-123.ap-southeast-1.compute.amazonaws.com &&
                             docker stop authentication-server &&
                             docker rm authentication-server &&
                             docker image prune --force &&
-                            docker run -d -p 3000:3000 --name authentication-server christianbalderrama/authentication-server:main
+                            docker run -d -p 3000:3000 --name authentication-server christianbalderrama/authentication-server:${env.BRANCH_NAME}
                         '''
                     }
                 }
