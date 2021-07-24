@@ -34,7 +34,7 @@ pipeline {
                 script {
                     sshagent(credentials: ['authentication-server']) {
                         sh 'ssh -v ec2-user@13.229.251.64'
-                        sh 'ssh ec2-user@13.229.251.64'
+                        sh 'ssh -o StrictHostKeyChecking=no ec2-user@13.229.251.64'
                         sh '''
                             docker stop authentication-server &&
                             docker rm authentication-server &&
