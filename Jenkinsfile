@@ -15,5 +15,16 @@ pipeline {
         }
       }
     }
+
+    // Uploading Docker images into Docker Hub
+    stage('Upload Image') {
+     steps{    
+        script {
+            docker.withRegistry('https://dockerhub.com', registryCredential ) {
+                dockerImage.push()
+            }
+        }
+      }
+    }
   }
 }
