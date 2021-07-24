@@ -33,8 +33,8 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['authentication-server']) {
-                        sh 'ssh ec2-user@18.141.139.11 uptime'
-                        sh 'ssh -v ec2-user@18.141.139.11 uptime'
+                        sh 'ssh -v ec2-user@13.229.251.64'
+                        sh 'ssh ec2-user@13.229.251.64'
                         sh '''
                             docker stop authentication-server &&
                             docker rm authentication-server &&
