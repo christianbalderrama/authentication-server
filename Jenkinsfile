@@ -4,27 +4,40 @@ pipeline {
         registry = "christianbalderrama/authentication-server:${env.BRANCH_NAME}"
         registryCredential = 'DockerHub'
         dockerImage = ''
+        instanceURL = ''
     }
     
     stages {
-    // Building Docker images
-    stage('Building image') {
-      steps {
-        script {
-          dockerImage = docker.build("${registry}", "--build-arg NODE_ENV=${env.BRANCH_NAME} .")
-        }
-      }
-    }
-
-    // Uploading Docker images into Docker Hub
-    stage('Upload Image') {
-     steps{    
-        script {
-            docker.withRegistry('', registryCredential) {
-                dockerImage.push("${env.BRANCH_NAME}")
+        // Building Docker images
+        stage('Building Image') {
+            steps {
+                script {
+                dockerImage = docker.build("${registry}", "--build-arg NODE_ENV=${env.BRANCH_NAME} .")
+                }
             }
         }
-      }
-    }
+
+        // Uploading Docker images into Docker Hub
+        stage('Upload Image') {
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push("${env.BRANCH_NAME}")
+                    }
+                }
+            }
+        }
+
+        // Deployment
+        stage('Deployment') {
+            steps {
+                sshagent(credentials: 'ec2-user') {
+                    sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-18-141-58-123.ap-southeast-1.compute.amazonaws.com'
+                    sh '''
+                        docker run -p 3000:3000 --name christianbalderrama/authentication-server:main -d
+                    '''
+                }
+            }
+        }
   }
 }
