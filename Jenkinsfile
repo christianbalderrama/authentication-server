@@ -20,7 +20,7 @@ pipeline {
     stage('Upload Image') {
      steps{    
         script {
-            dockerImage.push()
+            dockerImage.push("${env.BRANCH_NAME}")
         }
       }
     }
