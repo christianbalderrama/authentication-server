@@ -20,9 +20,7 @@ pipeline {
     stage('Upload Image') {
      steps{    
         script {
-            docker.withRegistry('https://dockerhub.com', registryCredential ) {
-                dockerImage.push()
-            }
+            dockerImage.push()
         }
       }
     }
