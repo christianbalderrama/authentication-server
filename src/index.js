@@ -7,6 +7,7 @@ import {client, sequelize} from "./database";
 
 // Load .env
 env.env(process.env.NODE_ENV);
+console.log("NODE_ENV >>> ", process.env.NODE_ENV);
 console.log("ENV >>> ", process.env);
 
 import first from "./routes/first";
