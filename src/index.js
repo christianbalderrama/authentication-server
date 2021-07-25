@@ -1,9 +1,12 @@
 import "regenerator-runtime";
-import "dotenv/config";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import * as dotenv from "custom-env";
 import {client, sequelize} from "./database";
+
+// Load .env
+dotenv.env(process.env.NODE_ENV);
 
 import first from "./routes/first";
 
