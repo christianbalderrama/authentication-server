@@ -22,6 +22,10 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential) {
+                        if (env.BRANCH_NAME == "production") {
+                            dockerImage.push("latest")
+                        }
+
                         dockerImage.push("${env.BRANCH_NAME}")
                     }
                 }
@@ -32,10 +36,10 @@ pipeline {
         stage('Deployment') {
             steps {
                 script {
-                    if (env.BRANCH_NAME == "main" || env.BRANCH_NAME == "production") {
-                        instanceURL = "ec2-13-229-251-64.ap-southeast-1.compute.amazonaws.com"
+                    if (env.BRANCH_NAME == "production") {
+                        instanceURL = env.PRODUCTION_HOST
                     } else {
-                        instanceURL = "ec2-13-229-251-64.ap-southeast-1.compute.amazonaws.com"
+                        instanceURL = env.DEV_HOST
                     }
 
                     sshagent(credentials: ['authentication-server']) {
