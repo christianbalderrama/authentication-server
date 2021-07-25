@@ -8,8 +8,8 @@
     "production": "npm run pipeline-production",
     "clean": "rm -Rf dist && mkdir dist",
     "start": "node ./dist/index.js",
-    "pipeline-development": "npm run clean && npx babel ./src/ -d ./dist --source-maps && NODE_ENV=development npm start",
-    "pipeline-production": "npm run clean && npx babel ./src -d ./dist && NODE_ENV=production npm start"
+    "pipeline-development": "npm run clean && npx babel ./src/ -d ./dist --source-maps && export NODE_ENV=development && npm start",
+    "pipeline-production": "npm run clean && npx babel ./src -d ./dist && export NODE_ENV=production && npm start"
   },
   "keywords": [],
   "author": "",
