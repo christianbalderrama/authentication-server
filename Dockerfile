@@ -2,6 +2,9 @@ FROM node:alpine
 RUN apk add --no-cache --upgrade bash
 
 ARG NODE_ENV=development
+ARG PG_HOST
+
+ENV PG_HOST $PG_HOST
 ENV NODE_ENV $NODE_ENV
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=postgres
